@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="find">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/views/system/find.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
