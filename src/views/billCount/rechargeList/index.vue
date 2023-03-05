@@ -430,7 +430,10 @@
 <!--			</el-col>-->
 <!--			<right-toolbar :showSearch.sync="showSearch" @queryTable="getList"></right-toolbar>-->
 <!--		</el-row>-->
-    <el-tag type="success" effect="dark">当前充值：{{this.withdrawalMap.currentWithdrawal}}</el-tag> <el-tag type="danger" effect="dark">当日充值：{{this.withdrawalMap.cashWithdrawalOnTheSameDay}}</el-tag> <el-tag type="warning" effect="dark">昨日充值：{{this.withdrawalMap.withdrawalYesterday}}</el-tag>
+    <el-tag type="success" effect="dark">当前充值：{{this.withdrawalMap.currentWithdrawal}}</el-tag>
+    <el-tag type="danger" effect="dark">当日充值：{{this.withdrawalMap.cashWithdrawalOnTheSameDay}}</el-tag>
+    <el-tag type="warning" effect="dark">昨日充值：{{this.withdrawalMap.withdrawalYesterday}}</el-tag>
+    <el-tag type="danger" effect="dark">昨日平台总余额：{{this.withdrawalMap.totalPlatformBalance}}</el-tag>
 		<el-table v-loading="loading" :data="recordList" @selection-change="handleSelectionChange">
 			<el-table-column type="selection" width="55" align="center" />
 			<el-table-column label="充值记录ID2" align="center" prop="id" width="100"  :show-overflow-tooltip="true"/>
