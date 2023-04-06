@@ -193,6 +193,7 @@
 						<span>占位符</span>
 					</el-button>
 					<el-button type="primary" size="small" plain class="input" @click="lookInfo(scope.row)">查看详情</el-button>
+					<el-button type="primary" size="small" plain class="input" @click="lookInfo(scope.row)">查看详情</el-button>
 					<el-button type="primary" size="small" plain class="input" @click="redEnvelopeConfiguration(scope.row)">红包配置</el-button>
 					<el-button type="primary" size="small" plain class="input" @click="handleUpdate(scope.row)"
 						v-hasPermi="['system:missuUsers:edit']">修改资料

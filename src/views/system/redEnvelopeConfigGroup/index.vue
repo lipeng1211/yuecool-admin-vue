@@ -132,6 +132,15 @@
           @keyup.enter.native="handleQuery"
         />
       </el-form-item>
+      <el-form-item label="赔率" prop="compensation">
+        <el-input
+          v-model="queryParams.compensation"
+          placeholder="请输入赔率"
+          clearable
+          size="small"
+          @keyup.enter.native="handleQuery"
+        />
+      </el-form-item>
       <el-form-item>
         <el-button type="cyan" icon="el-icon-search" size="mini" @click="handleQuery">搜索</el-button>
         <el-button icon="el-icon-refresh" size="mini" @click="resetQuery">重置</el-button>
@@ -198,6 +207,7 @@
       <el-table-column label="金额3中奖率" align="center" prop="winningRateThree" />
       <el-table-column label="金额4中奖率" align="center" prop="winningRateFour" />
       <el-table-column label="金额5中奖率" align="center" prop="winningRateFive" />
+      <el-table-column label="赔率" align="center" prop="compensation" />
       <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
         <template slot-scope="scope">
           <el-button
@@ -217,7 +227,7 @@
         </template>
       </el-table-column>
     </el-table>
-    
+
     <pagination
       v-show="total>0"
       :total="total"
@@ -276,6 +286,9 @@
         <el-form-item label="金额5中奖率" prop="winningRateFive">
           <el-input v-model="form.winningRateFive" placeholder="请输入金额5中奖率" />
         </el-form-item>
+        <el-form-item label="赔率" prop="compensation">
+          <el-input v-model="form.compensation" placeholder="请输入赔率" />
+        </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
@@ -328,7 +341,8 @@ export default {
         winningRateTwo: null,
         winningRateThree: null,
         winningRateFour: null,
-        winningRateFive: null
+        winningRateFive: null,
+        compensation: null
       },
       // 表单参数
       form: {},
@@ -373,7 +387,8 @@ export default {
         winningRateTwo: null,
         winningRateThree: null,
         winningRateFour: null,
-        winningRateFive: null
+        winningRateFive: null,
+        compensation: null
       };
       this.resetForm("form");
     },

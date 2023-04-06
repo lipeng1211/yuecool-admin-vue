@@ -212,16 +212,9 @@
         <el-table-column label="包数" align="center" prop="num" :disabled="true"/>
         <el-table-column label="雷数" align="center" prop="lieutenantGeneralNumber" :disabled="true"/>
         <el-table-column label="1单雷 2连环雷" align="center" prop="numType" :disabled="true"/>
-        <el-table-column label="金额1" align="center" prop="amountOne" :disabled="true"/>
-        <el-table-column label="金额2" align="center" prop="amountTwo" :disabled="true"/>
-        <el-table-column label="金额3" align="center" prop="amountThree" :disabled="true"/>
-        <el-table-column label="金额4" align="center" prop="amountFour" :disabled="true"/>
-        <el-table-column label="金额5" align="center" prop="amountFive" :disabled="true"/>
-        <el-table-column label="金额1中奖率" align="center" prop="winningRateOne" />
-        <el-table-column label="金额2中奖率" align="center" prop="winningRateTwo" />
-        <el-table-column label="金额3中奖率" align="center" prop="winningRateThree" />
-        <el-table-column label="金额4中奖率" align="center" prop="winningRateFour" />
-        <el-table-column label="金额5中奖率" align="center" prop="winningRateFive" />
+        <el-table-column label="群金额限制" align="center" prop="amountOne" :disabled="true"/>
+        <el-table-column label="流水控制" align="center" prop="amountTwo" :disabled="true"/>
+        <el-table-column label="赔率" align="center" prop="compensation" />
         <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button
@@ -257,35 +250,15 @@
             <el-option label="请选择字典生成" value="" :disabled="true"/>
           </el-select>
         </el-form-item>
-        <el-form-item label="金额1" prop="amountOne">
-          <el-input v-model="formV2.amountOne" placeholder="请输入金额1" :disabled="true"/>
+        <el-form-item label="群金额限制" prop="amountOne">
+          <el-input v-model="formV2.amountOne" placeholder="群金额限制" />
         </el-form-item>
-        <el-form-item label="金额2" prop="amountTwo">
-          <el-input v-model="formV2.amountTwo" placeholder="请输入金额2" :disabled="true"/>
+        <el-form-item label="流水控制" prop="amountTwo">
+          <el-input v-model="formV2.amountTwo" placeholder="流水控制" />
         </el-form-item>
-        <el-form-item label="金额3" prop="amountThree">
-          <el-input v-model="formV2.amountThree" placeholder="请输入金额3" :disabled="true"/>
-        </el-form-item>
-        <el-form-item label="金额4" prop="amountFour">
-          <el-input v-model="formV2.amountFour" placeholder="请输入金额4" :disabled="true"/>
-        </el-form-item>
-        <el-form-item label="金额5" prop="amountFive">
-          <el-input v-model="formV2.amountFive" placeholder="请输入金额5" :disabled="true"/>
-        </el-form-item>
-        <el-form-item label="金额1中奖率" prop="winningRateOne">
-          <el-input v-model="formV2.winningRateOne" placeholder="请输入金额1中奖率" />
-        </el-form-item>
-        <el-form-item label="金额2中奖率" prop="winningRateTwo">
-          <el-input v-model="formV2.winningRateTwo" placeholder="请输入金额2中奖率" />
-        </el-form-item>
-        <el-form-item label="金额3中奖率" prop="winningRateThree">
-          <el-input v-model="formV2.winningRateThree" placeholder="请输入金额3中奖率" />
-        </el-form-item>
-        <el-form-item label="金额4中奖率" prop="winningRateFour">
-          <el-input v-model="formV2.winningRateFour" placeholder="请输入金额4中奖率" />
-        </el-form-item>
-        <el-form-item label="金额5中奖率" prop="winningRateFive">
-          <el-input v-model="formV2.winningRateFive" placeholder="请输入金额5中奖率" />
+
+        <el-form-item label="赔率" prop="compensation">
+          <el-input v-model="formV2.compensation" placeholder="请输入赔率" />
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
@@ -472,19 +445,30 @@
       },
 
       /** 提交按钮 */
-      submitFormV2() {
-        this.$refs["form"].validate(valid => {
+      submitFormV2: function() {
+        this.$refs['form'].validate(valid => {
           if (valid) {
+            let  amountOne = this.formV2.amountOne.split('-');
+            let  amountTwo = this.formV2.amountTwo.split('-');
+            let  amountThree = this.formV2.amountThree.split('-');
+
+          if (amountOne.length === 2 && amountOne.length === 2 && amountOne.length === 2){
             updateRedEnvelopeConfigGroup(this.formV2).then(response => {
               if (response.code === 200) {
-                this.msgSuccess("修改成功");
-                this.openV2 = false;
-                this.redEnvelopeConfiguration();
+                this.msgSuccess('修改成功')
+                this.openV2 = false
+                this.redEnvelopeConfiguration()
               }
-            });
+            })
+
+          }else {
+            this.msgError('参数错误')
           }
-        });
+
+          }
+        })
       },
+
       handleDeleteV2(row) {
         const ids = row.id || this.idsV2;
         this.$confirm('是否确认删除所选的的数据项?', "警告", {
